@@ -1,0 +1,48 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Full list of 14 locations
+locations = [
+    'ITAK LOT3','ITAK LOT4','ITAK LOT5', 'ITAK LOT8', 'ITAK LOT9',
+    'ITAK LOT10', 'ITAK LOT11', 'ITAK LOT12', 'ITAK LOT13', 
+    'ITAK LOT14', 'ITAK LOT15', 'ITAK LOT16', 'ITAK LOT17', 'ITAK LOT18'
+]
+
+# All oxides with example values (replace with actual values as needed)
+data = {
+    'Location': locations,
+    'SiO₂':   [45.2, 48.1, 43.8, 47.3, 46.5, 44.1, 43.9, 44.7, 46.0, 45.8, 47.1, 45.4, 43.2, 42.9],
+    'Al₂O₃':  [14.3, 13.5, 15.2, 14.7, 13.9, 14.0, 13.8, 14.2, 13.6, 14.1, 13.7, 14.4, 14.0, 13.5],
+    'Fe₂O₃':  [5.1, 6.2, 4.9, 5.5, 5.3, 5.6, 5.2, 5.8, 5.4, 5.0, 6.1, 5.9, 5.7, 5.5],
+    'CaO':    [9.3, 10.1, 8.7, 9.8, 9.2, 9.6, 9.4, 9.5, 9.1, 9.0, 8.8, 9.7, 9.9, 9.3],
+    'MgO':    [2.5, 2.8, 2.3, 2.7, 2.6, 2.4, 2.5, 2.7, 2.6, 2.5, 2.4, 2.7, 2.8, 2.6],
+    'K₂O':    [2.3, 2.5, 2.1, 2.4, 2.6, 2.2, 2.4, 2.3, 2.5, 2.7, 2.0, 2.1, 2.6, 2.4],
+    'Na₂O':   [3.1, 3.0, 3.2, 3.1, 3.3, 3.2, 3.0, 3.4, 3.5, 3.1, 3.0, 3.2, 3.3, 3.1],
+    'TiO₂':   [0.8, 0.7, 0.9, 0.85, 0.82, 0.79, 0.83, 0.81, 0.86, 0.84, 0.78, 0.8, 0.85, 0.83],
+    'MnO':    [0.12, 0.15, 0.11, 0.13, 0.14, 0.12, 0.13, 0.15, 0.14, 0.12, 0.13, 0.11, 0.13, 0.14],
+    'P₂O₅':   [0.5, 0.6, 0.4, 0.5, 0.45, 0.55, 0.48, 0.52, 0.5, 0.49, 0.51, 0.46, 0.53, 0.5],
+    'LOI':    [10.1, 9.5, 11.2, 10.8, 9.9, 10.5, 10.2, 9.8, 10.0, 10.1, 10.3, 9.7, 10.4, 9.9],
+    'SO₃':    [0.25, 0.28, 0.22, 0.26, 0.27, 0.24, 0.23, 0.29, 0.26, 0.25, 0.27, 0.23, 0.28, 0.24]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Set 'Location' as index for plotting
+df.set_index('Location', inplace=True)
+
+# Plot stacked area chart
+df.plot.area(
+    figsize=(14, 7),
+    colormap='tab20',
+    alpha=0.9
+)
+
+plt.title('Oxide Compositions by Location (Including SO₃)')
+plt.xlabel('Location')
+plt.ylabel('Composition (%)')
+plt.xticks(rotation=45)
+plt.legend(title='Oxides', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
