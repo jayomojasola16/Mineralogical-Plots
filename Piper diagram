@@ -1,0 +1,45 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample simplified cation triangle values (normalized dummy oxide composition)
+# Piper diagrams require meq/L, but we simulate normalized data for demonstration
+locations = ['ITAK LOT3', 'ITAK LOT4', 'ITAK LOT5', 'ITAK LOT8']
+cation_data = {
+    'Ca': [9.3, 10.1, 8.7, 9.8],
+    'Mg': [2.2, 2.5, 2.0, 2.3],
+    'Na+K': [5.4, 5.5, 5.3, 5.5]
+}
+
+# Normalize cation data so their sum = 100 for each sample
+cation_percent = []
+for i in range(len(locations)):
+    total = cation_data['Ca'][i] + cation_data['Mg'][i] + cation_data['Na+K'][i]
+    ca = cation_data['Ca'][i] / total * 100
+    mg = cation_data['Mg'][i] / total * 100
+    na_k = cation_data['Na+K'][i] / total * 100
+    cation_percent.append([ca, mg, na_k])
+
+# Function to convert ternary coordinates to cartesian for plotting
+def ternary_to_cartesian(ca, mg, na_k):
+    x = 0.5 * (2 * na_k + mg) / 100
+    y = (np.sqrt(3) / 2) * mg / 100
+    return x, y
+
+# Plot cation triangle
+fig, ax = plt.subplots(figsize=(8, 7))
+
+# Draw triangle
+triangle_x = [0, 1, 0.5, 0]
+triangle_y = [0, 0, np.sqrt(3)/2, 0]
+ax.plot(triangle_x, triangle_y, 'k-')
+
+# Plot each sample
+colors = ['red', 'blue', 'green', 'purple']
+for i, (ca, mg, na_k) in enumerate(cation_percent):
+    x, y = ternary_to_cartesian(ca, mg, na_k)
+    ax.plot(x, y, 'o', label=locations[i], color=colors[i])
+
+ax.set_title("Simplified Piper Diagram - Cation Triangle")
+ax.axis('off')
+ax.legend()
+plt.show()
