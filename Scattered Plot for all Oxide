@@ -1,0 +1,22 @@
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import seaborn as sns
+
+# Scale data
+features = df.columns
+X = StandardScaler().fit_transform(df)
+
+# PCA
+pca = PCA(n_components=2)
+components = pca.fit_transform(X)
+
+# Create PCA plot
+pca_df = pd.DataFrame(data=components, columns=['PC1', 'PC2'])
+pca_df['Location'] = df.index
+
+plt.figure(figsize=(10,6))
+sns.scatterplot(x='PC1', y='PC2', hue='Location', data=pca_df, palette='tab10')
+plt.title('PCA: Oxide Compositions')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
