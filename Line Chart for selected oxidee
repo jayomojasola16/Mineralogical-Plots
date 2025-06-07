@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Create the DataFrame
+data = {
+    'Mineral': ['Quartz', 'Albite', 'Hematite', 'Pentlandite', 'Orthoclase'],
+    'ITAP LOT12': [19.7, None, 61, 8, 11.1],
+    'ITAP LOT5': [89, 6, 5.4, None, None],
+    'ITAP LOT17': [72, 6.7, 21, None, None],
+    'ITAP LOT18': [32, None, 59, 5.3, None],
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Set 'Mineral' as the index
+df.set_index('Mineral', inplace=True)
+
+# Transpose so Locations are rows and Minerals are columns
+df = df.transpose()
+
+# Plotting
+plt.figure(figsize=(10, 6))
+for column in df.columns:
+    plt.plot(df.index, df[column], marker='o', label=column)
+
+plt.xlabel('Location')
+plt.ylabel('Mineral Composition (%)')
+plt.title('Mineral Distribution across Locations')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.legend(title='Minerals', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+plt.show()
