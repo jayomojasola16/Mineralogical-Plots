@@ -1,0 +1,27 @@
+# Inputting the data from the second image
+data2 = {
+    "Sample": list(range(1, 13)),
+    "Na2O": [None, None, None, None, None, None, None, None, None, None, None, 3.64],
+    "Al2O3": [None, 0.79, None, None, None, None, None, None, None, None, None, 28.52],
+    "SiO2": [100.00, None, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 100.00, 52.92],
+    "CaO": [None, None, None, None, None, None, None, None, None, None, None, 14.91],
+    "Fe2O3": [99.21, None, None, None, None, None, None, None, None, None, None, None]
+}
+
+# Convert to DataFrame
+df2 = pd.DataFrame(data2)
+
+# Create the bar chart
+df2_plot = df2.set_index("Sample")
+df2_plot.plot(kind="bar", stacked=True, figsize=(12, 6), colormap="tab20")
+
+# Customize the plot
+plt.title("SEM-EDS Results (wt.%) - ")
+plt.ylabel("wt.%")
+plt.xlabel("Sample Number")
+plt.xticks(rotation=0)
+plt.legend(title="Oxide")
+
+# Show the plot
+plt.tight_layout()
+plt.show()
