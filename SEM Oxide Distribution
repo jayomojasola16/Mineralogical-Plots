@@ -17,7 +17,7 @@ df_plot = df.set_index("Sample")
 df_plot.plot(kind="bar", stacked=True, figsize=(12, 6), colormap="tab20")
 
 # Customize the plot
-plt.title("SEM-EDS Results (wt.%) Itakpe Lot 9")
+plt.title("SEM-EDS Results (wt.%)")
 plt.ylabel("wt.%")
 plt.xlabel("Sample Number")
 plt.xticks(rotation=0)
