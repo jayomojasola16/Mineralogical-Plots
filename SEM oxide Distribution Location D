@@ -1,0 +1,29 @@
+import matplotlib.cm as cm # Import the colormap module
+
+# Fill NaNs with 0 to ensure all columns are plotted
+# Changed df4 to df3
+df3_filled = df3.fillna(0)
+df3_plot = df3_filled.set_index("Sample")
+
+# Create the bar chart with all oxides visible
+# Changed df4_plot to df3_plot
+colors = cm.get_cmap('tab20', len(df3_plot.columns))
+
+ax = df3_plot.plot(
+    kind="bar",
+    stacked=True,
+    figsize=(16, 8),
+    color=[colors(i) for i in range(len(df3_plot.columns))]
+)
+
+# Enhance readability
+plt.title("SEM-EDS Results (wt.%) - ITAKPE LOT 16", fontsize=16, weight='bold')
+plt.ylabel("Weight %", fontsize=12)
+plt.xlabel("Sample Number", fontsize=12)
+plt.xticks(rotation=90, fontsize=9)
+plt.yticks(fontsize=10)
+plt.legend(title="Oxide", title_fontsize=12, fontsize=10, bbox_to_anchor=(1.02, 1), loc='upper left')
+plt.tight_layout()
+plt.grid(True, axis='y', linestyle='--', linewidth=0.5)
+
+plt.show()
