@@ -1,0 +1,73 @@
+# Inputting the data from the third image (abbreviated to fit here, will process the rest similarly if needed)
+data3 = {
+    "Sample": list(range(1, 55)),
+    "F": [None]*54,
+    "Na2O": [None]*54,
+    "Al2O3": [None]*54,
+    "SiO2": [100.00]*54,
+    "P2O5": [None]*54,
+    "Cl": [None]*54,
+    "CaO": [None]*54,
+    "MnO": [None]*54,
+    "Fe2O3": [None]*54
+}
+
+# Manually updating entries with specific values based on visible data (only for non-SiO₂ values)
+data3["Na2O"][10] = 11.51
+data3["Al2O3"][10] = 18.66
+data3["SiO2"][10] = 69.83
+
+data3["Al2O3"][5] = 0.57
+data3["Fe2O3"][5] = 99.43
+
+data3["Fe2O3"][9] = 100.00
+
+data3["Fe2O3"][16] = 100.00
+data3["SiO2"][17] = 99.10
+data3["MnO"][17] = 0.90
+
+data3["SiO2"][27] = 99.29
+data3["Al2O3"][26] = 0.71
+
+data3["F"][27] = 3.38
+data3["Al2O3"][27] = 0.71
+data3["SiO2"][27] = 39.37
+data3["P2O5"][27] = 0.38
+data3["CaO"][27] = 55.98
+data3["MnO"][27] = 0.89
+
+data3["Al2O3"][30] = 0.82
+data3["Fe2O3"][30] = 99.18
+
+data3["Al2O3"][41] = 0.61
+data3["Fe2O3"][41] = 99.39
+
+data3["F"][42] = 3.98
+data3["Al2O3"][42] = 0.61
+data3["SiO2"][42] = 40.68
+data3["CaO"][42] = 54.20
+data3["MnO"][42] = 1.14
+
+data3["Al2O3"][44] = 0.35
+data3["SiO2"][44] = 99.65
+
+data3["P2O5"][51] = 1.81
+data3["Fe2O3"][51] = 98.19
+
+# Convert to DataFrame
+df3 = pd.DataFrame(data3)
+
+# Create the bar chart
+df3_plot = df3.set_index("Sample")
+df3_plot.plot(kind="bar", stacked=True, figsize=(14, 8), colormap="tab20")
+
+# Customize the plot
+plt.title("SEM-EDS Results (wt.%) - C")
+plt.ylabel("wt.%")
+plt.xlabel("Sample Number")
+plt.xticks(rotation=90)
+plt.legend(title="Oxide")
+
+# Show the plot
+plt.tight_layout()
+plt.show()
