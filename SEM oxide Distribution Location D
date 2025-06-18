@@ -17,7 +17,7 @@ ax = df3_plot.plot(
 )
 
 # Enhance readability
-plt.title("SEM-EDS Results (wt.%) - ITAKPE LOT 16", fontsize=16, weight='bold')
+plt.title("SEM-EDS Results (wt.%) -", fontsize=16, weight='bold')
 plt.ylabel("Weight %", fontsize=12)
 plt.xlabel("Sample Number", fontsize=12)
 plt.xticks(rotation=90, fontsize=9)
