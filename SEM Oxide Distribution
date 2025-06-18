@@ -1,0 +1,28 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Manually inputting the data from the image
+data = {
+    "Sample": list(range(1, 14)),
+    "Al2O3": [None, None, None, None, None, None, None, None, 32.87, None, None, None, 1.73],
+    "SiO2": [None, 100.00, 100.00, 100.00, None, None, None, 100.00, 58.18, 100.00, 100.00, 100.00, None],
+    "Fe2O3": [100.00, None, None, None, 100.00, 100.00, 100.00, None, 8.95, 100.00, None, 100.00, 98.27]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Create the bar chart
+df_plot = df.set_index("Sample")
+df_plot.plot(kind="bar", stacked=True, figsize=(12, 6), colormap="tab20")
+
+# Customize the plot
+plt.title("SEM-EDS Results (wt.%) Itakpe Lot 9")
+plt.ylabel("wt.%")
+plt.xlabel("Sample Number")
+plt.xticks(rotation=0)
+plt.legend(title="Oxide")
+
+# Show the plot
+plt.tight_layout()
+plt.show()
